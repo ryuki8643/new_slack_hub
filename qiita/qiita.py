@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_rss_qiita():
+def read_rss_qiita():
     url = 'https://qiita.com/popular-items/feed.atom'
     req = requests.get(url)
     txt = BeautifulSoup(req.text, 'html.parser')
