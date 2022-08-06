@@ -9,6 +9,8 @@ def read_rss_qiita():
     print("a", txt)
 
     rank = 1
+    rss_ranks = []
     for item in txt.findAll('entry'):
-        print(rank, item.title.text)
+        rss_ranks.append(str(rank) + item.title.text)
         rank += 1
+    return "\n".join(rss_ranks)

@@ -6,7 +6,8 @@ name = "pypi"
 [packages]
 requests = "*"
 bs4 = "*"
-slackbot = "*"
+python-dotenv = "*"
+slack-bolt = "*"
 
 [dev-packages]
 
