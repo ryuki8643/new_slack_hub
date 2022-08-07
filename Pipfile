@@ -8,6 +8,10 @@ requests = "*"
 bs4 = "*"
 python-dotenv = "*"
 slack-bolt = "*"
+mecab-python3 = "*"
+numpy = "*"
+pysummarization = "*"
+nltk = "*"
 
 [dev-packages]
 
