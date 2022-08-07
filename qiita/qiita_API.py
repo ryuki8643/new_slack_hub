@@ -46,7 +46,7 @@ for url in qiita_dict["url"]:
     article_id = re.findall("(?<=items/)[^]]+(?=\?)", url)[0]
     individual_url = 'https://qiita.com/api/v2/items/{}'.format(article_id)
     response_json = qiita_API_access(individual_url)
-    print(individual_url)
+    print(individual_url,response_json['likes_count'])
     qiita_dict["text"].append(
         summarize_text(text_preprocess_for_sum(
             response_json["body"]

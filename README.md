@@ -1,3 +1,5 @@
 slack botにニュースをまとめて投げてもらうプロジェクト
 
+pipenv run start
+
 main関数に処理の関数をimportすれば動くので、zenn,qiitaなどごとに別々のbranchでフォルダを作って、そこで作業し、動作確認したらpull requestを出すこと
