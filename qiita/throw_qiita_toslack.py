@@ -16,7 +16,8 @@ def message_hello(message, say):
 @app.message("qiisum")
 def message_hello(message, say):
     # イベントがトリガーされたチャンネルへ say() でメッセージを送信します
-    say(qiita_API.summaries_of_qiita_pop())
+    for texts in qiita_API.summaries_of_qiita_pop():
+        say(texts)
 
 @app.event("app_home_opened")
 def handle_app_home_opened_events(body, logger):

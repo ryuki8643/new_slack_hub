@@ -46,7 +46,7 @@ for url in qiita_dict["url"]:
     article_id = re.findall("(?<=items/)[^]]+(?=\?)", url)[0]
     individual_url = 'https://qiita.com/api/v2/items/{}'.format(article_id)
     response_json = qiita_API_access(individual_url)
-    print(individual_url,response_json,)
+    print(individual_url)
     qiita_dict["text"].append(
         summarize_text(text_preprocess_for_sum(
             response_json["body"]
@@ -54,11 +54,14 @@ for url in qiita_dict["url"]:
     qiita_dict["like"].append(response_json['likes_count'])
 
 def summaries_of_qiita_pop():
-    qiita_sum_result = ""
+    results_list = []
+
     for num in reversed(range(len(qiita_dict["title"]))):
-        qiita_sum_result+="*"+str(num)+"位 "+str(qiita_dict["like"][num])+"☆"+qiita_dict["title"][num]+"*\n\n"
+        qiita_sum_result = ""
+        qiita_sum_result+="*"+str(num+1)+"位 "+str(qiita_dict["like"][num])+"☆"+qiita_dict["title"][num]+"*\n\n"
         qiita_sum_result +=qiita_dict["text"][num]
-    return qiita_sum_result
+        results_list.append(qiita_sum_result)
+    return results_list
 
 
 
