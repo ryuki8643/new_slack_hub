@@ -3,13 +3,18 @@ import json
 import re
 
 import requests
-from slack_bolt import App
 from qiita.qiita_rss import read_rss_qiita_ids
+from qiita.summerize_text import summarize_text
 
 from dotenv import load_dotenv
 
+
+load_dotenv()
+
+
 qiita_dict = read_rss_qiita_ids()
 qiita_dict["text"] = []
+qiita_dict["like"] = []
 
 
 def qiita_API_access(qiita_url):
@@ -25,9 +30,35 @@ def qiita_API_access(qiita_url):
     return json.loads(res.text)
 
 
-for url in reversed(qiita_dict["url"]):
+def text_preprocess_for_sum(text):
+    def programming_text(pretext):
+        if re.match("\t", pretext) or text == "":
+            return False
+        else:
+            return True
+    return re.sub(r"https?://[\w/:%#\$&\?\(\)~\.=\+\-]+", "",
+           "\n".join(
+               list(
+                   filter(
+                       programming_text, text.split("\n")))))
+
+for url in qiita_dict["url"]:
     article_id = re.findall("(?<=items/)[^]]+(?=\?)", url)[0]
     individual_url = 'https://qiita.com/api/v2/items/{}'.format(article_id)
     response_json = qiita_API_access(individual_url)
+    print(individual_url,response_json,)
+    qiita_dict["text"].append(
+        summarize_text(text_preprocess_for_sum(
+            response_json["body"]
+        )))
+    qiita_dict["like"].append(response_json['likes_count'])
+
+def summaries_of_qiita_pop():
+    qiita_sum_result = ""
+    for num in reversed(range(len(qiita_dict["title"]))):
+        qiita_sum_result+="*"+str(num)+"位 "+str(qiita_dict["like"][num])+"☆"+qiita_dict["title"][num]+"*\n\n"
+        qiita_sum_result +=qiita_dict["text"][num]
+    return qiita_sum_result
+
 
 

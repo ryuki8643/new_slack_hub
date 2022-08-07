@@ -1,4 +1,4 @@
-import qiita.qiita_rss
+from qiita import qiita_rss,qiita_API
 from slackbot_init._init_ import app
 
 
@@ -11,8 +11,12 @@ def message_hello(message, say):
 @app.message("qiita")
 def message_hello(message, say):
     # イベントがトリガーされたチャンネルへ say() でメッセージを送信します
-    say(qiita.qiita_rss.read_rss_qiita_txt())
+    say(qiita_rss.read_rss_qiita_txt())
 
+@app.message("qiisum")
+def message_hello(message, say):
+    # イベントがトリガーされたチャンネルへ say() でメッセージを送信します
+    say(qiita_API.summaries_of_qiita_pop())
 
 @app.event("app_home_opened")
 def handle_app_home_opened_events(body, logger):

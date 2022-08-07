@@ -10,8 +10,8 @@ python-dotenv = "*"
 slack-bolt = "*"
 mecab-python3 = "*"
 numpy = "*"
-pysummarization = "*"
 nltk = "*"
+pysummarization = "*"
 
 [dev-packages]
 
