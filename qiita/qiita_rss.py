@@ -6,7 +6,11 @@ def read_rss_qiita():
     url = 'https://qiita.com/popular-items/feed.atom'
     req = requests.get(url)
     txt = BeautifulSoup(req.text, 'html.parser')
-    print("a", txt)
+    return txt
+
+
+def read_rss_qiita_txt():
+    txt = read_rss_qiita()
 
     rank = 1
     rss_ranks = []
@@ -14,3 +18,14 @@ def read_rss_qiita():
         rss_ranks.append(str(rank) + item.title.text)
         rank += 1
     return "\n".join(rss_ranks)
+
+
+def read_rss_qiita_ids():
+    txt = read_rss_qiita()
+
+    rss_dict = { "url": [], "title": []}
+    for item in txt.findAll('entry'):
+        rss_dict["url"].append(item.link.get("href"))
+        rss_dict["title"].append(item.title.text)
+
+    return rss_dict

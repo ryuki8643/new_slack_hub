@@ -8,8 +8,17 @@ requests = "*"
 bs4 = "*"
 python-dotenv = "*"
 slack-bolt = "*"
+mecab-python3 = "*"
+numpy = "*"
+nltk = "*"
+pysummarization = "*"
+mecab = "*"
+unidic-lite = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.10"
+
+[scripts]
+start = "python main.py"
