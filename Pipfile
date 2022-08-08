@@ -14,6 +14,7 @@ nltk = "*"
 pysummarization = "*"
 mecab = "*"
 unidic-lite = "*"
+lxml = "*"
 
 [dev-packages]
 
