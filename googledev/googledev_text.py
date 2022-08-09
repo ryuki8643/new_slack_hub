@@ -24,6 +24,7 @@ def get_new_blog_from_google_dev():
     for article_num in range(len(dates_list)):
         query = dates_list[article_num].p.text
         if judge_date(query):
+            results_list.append(query)
             geturl = cards_link_list[article_num].get("href")
             individual_article = read_article(geturl)
             for meta in individual_article.findAll("meta"):
