@@ -5,6 +5,10 @@
 name: Build and deploy Python app to Azure Web App - slackbotnews
 
 on:
+  paths-ignore:
+    - 'README.md'
+    - 'Pipfile'
+    - 'Pipfile.lock'
   push:
     branches:
       - main
