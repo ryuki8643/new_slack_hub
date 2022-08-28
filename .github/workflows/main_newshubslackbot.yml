@@ -6,9 +6,13 @@ name: Build and deploy Python app to Azure Web App - newshubslackbot
 
 on:
   push:
+    paths-ignore:
+      - 'Pipfile'
+      - 'Pipfile.lock'
     branches:
       - main
   workflow_dispatch:
+
 
 jobs:
   build:
