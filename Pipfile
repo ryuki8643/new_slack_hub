@@ -12,7 +12,7 @@ mecab-python3 = "*"
 numpy = "*"
 nltk = "*"
 pysummarization = "*"
-mecab = "*"
+
 unidic-lite = "*"
 lxml = "*"
 
