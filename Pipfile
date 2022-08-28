@@ -12,9 +12,9 @@ mecab-python3 = "*"
 numpy = "*"
 nltk = "*"
 pysummarization = "*"
-
 unidic-lite = "*"
 lxml = "*"
+flask = "*"
 
 [dev-packages]
 
