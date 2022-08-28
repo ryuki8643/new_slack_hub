@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 
 sys.dont_write_bytecode = True
 from slack_bolt.adapter.flask import SlackRequestHandler
@@ -10,6 +11,7 @@ from itmedia.throw_itmedia_toslack import *
 from googledev.throw_googledev_toslack import *
 
 
+logging.basicConfig(level=logging.INFO)
 # アプリを起動します
 
 from flask import Flask, request
