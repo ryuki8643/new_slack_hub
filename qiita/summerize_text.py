@@ -8,7 +8,7 @@ def summarize_text(document):
 
     auto_abstractor.tokenizable_doc = MeCabTokenizer()
 
-    auto_abstractor.delimiter_list = ["。", "\n"]
+    auto_abstractor.delimiter_list = ["．","。", "\n"]
 
     abstractable_doc = TopNRankAbstractor()
 
