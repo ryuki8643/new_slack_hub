@@ -11,7 +11,7 @@ def message_hello(message, say):
 @app.message("qiita")
 def message_hello1(message, say):
     # イベントがトリガーされたチャンネルへ say() でメッセージを送信します
-    say(qiita_rss.read_rss_qiita_txt())
+    say("*QIITA*\n\n"+qiita_rss.read_rss_qiita_txt())
 
 
 @app.message("qiisum")
