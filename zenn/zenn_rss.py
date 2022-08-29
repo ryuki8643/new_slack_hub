@@ -12,5 +12,6 @@ def read_rss_zenn():
     rss_ranks = []
     for item in txt.findAll('item'):
         rss_ranks.append(str(rank) + item.title.text)
+        rss_ranks.append(item.link.text)
         rank += 1
     return "\n".join(rss_ranks)
