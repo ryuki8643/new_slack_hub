@@ -1,5 +1,5 @@
 from slackbot_init._init_ import app
-from itmedia import techblog_rss
+from techblogs import techblog_rss
 
 
 @app.message("gihyo")

@@ -7,7 +7,9 @@ from slack_bolt.adapter.flask import SlackRequestHandler
 from slack_sdk import WebClient
 from qiita.throw_qiita_toslack import *
 from zenn.throw_zenn_toslack import *
-from itmedia import *
+from techblogs.throw_other_tech_blog_to_slack import *
+from techblogs.thow_tech_blog_rss import *
+from techfeed.throw_techfeed_to_slack import *
 from googledev.throw_googledev_toslack import *
 
 
