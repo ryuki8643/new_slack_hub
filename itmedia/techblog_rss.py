@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup
 import datetime
 
 
-def read_rss_it_media():
-    url = 'https://rss.itmedia.co.jp/rss/2.0/ait.xml'
+def read_rss_tech_blog(url):
+#    url = 'https://rss.itmedia.co.jp/rss/2.0/ait.xml'
     req = requests.get(url)
     txt = BeautifulSoup(req.text, 'html.parser')
     return txt
@@ -15,11 +15,11 @@ def read_rss_it_media():
 def day_check():
     now_day = datetime.datetime.now().isoweekday()
     day_of_week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    return set([day_of_week[now_day - 1], day_of_week[now_day]])
+    return set([ day_of_week[now_day]])
 
 
-def read_rss_it_media_txt():
-    txt = read_rss_it_media()
+def get_rss_tech_blog(url):
+    txt = read_rss_tech_blog(url)
 
     rss_items = []
     valid_dates = day_check()
@@ -38,5 +38,7 @@ def read_rss_it_media_txt():
             rss_items.append(rss_item)
         else:
             break
-
-    return "\n\n".join(reversed(rss_items))
+    if rss_items:
+        return "\n\n".join(reversed(rss_items))
+    else:
+        return "Today no article"
