@@ -5,7 +5,7 @@ from slackbot_init._init_ import app
 @app.message("hello")
 def message_hello(message, say):
     # イベントがトリガーされたチャンネルへ say() でメッセージを送信します
-    say(f"Hey hello <@{message['user']}>!")
+    say(f"qiita hello <@{message['user']}>!")
 
 
 @app.message("qiita")
