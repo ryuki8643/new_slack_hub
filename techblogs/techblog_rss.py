@@ -15,7 +15,7 @@ def read_rss_tech_blog(url):
 def day_check():
     now_day = datetime.datetime.now().isoweekday()
     day_of_week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    return set([ day_of_week[now_day]])
+    return set([day_of_week[now_day - 1], day_of_week[now_day]])
 
 
 def get_rss_tech_blog(url):

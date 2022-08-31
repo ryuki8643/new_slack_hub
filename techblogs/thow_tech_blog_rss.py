@@ -5,7 +5,7 @@ from techblogs import techblog_rss
 @app.message("gihyo")
 def message_hello1(message, say):
 
-    say("*TechBlogs*\n\n"+techblog_rss.get_rss_tech_blog("https://gihyo.jp/dev/feed/rss2"))
+    say("*Gihyo*\n\n"+techblog_rss.get_rss_tech_blog("https://gihyo.jp/dev/feed/rss2"))
 
 @app.message("aws")
 def message_hello1(message, say):
@@ -15,7 +15,7 @@ def message_hello1(message, say):
 @app.message("mercari")
 def message_hello1(message, say):
 
-    say("Mercari*\n\n"+techblog_rss.get_rss_tech_blog("https://engineering.mercari.com/blog/feed.xml"))
+    say("*Mercari*\n\n"+techblog_rss.get_rss_tech_blog("https://engineering.mercari.com/blog/feed.xml"))
 @app.message("pfn")
 def message_hello1(message, say):
     say("*Preferred Network*\n\n"+techblog_rss.get_rss_tech_blog("https://tech.preferred.jp/ja/feed/"))
