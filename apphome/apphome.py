@@ -268,10 +268,27 @@ def approve_request(ack, body, client, say, message, event, payload):
             "https://techblog.yahoo.co.jp/index.xml")
     elif query == "techblogs":
         viewTemplate["blocks"][-1]["text"]["text"] = "*TechBlogs*\n\n" + techblog_rss.get_rss_tech_blog(
-            "https://yamadashy.github.io/tech-blog-rss-feed/feeds/rss.xml")[:2900]+"\n...and more"
+            "https://yamadashy.github.io/tech-blog-rss-feed/feeds/rss.xml")+"\n...and more"
     elif query == "infoq":
         viewTemplate["blocks"][-1]["text"]["text"] = "*Architecture*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://feed.infoq.com/")
+
+    for i in range(6,len(viewTemplate["blocks"])):
+        if len(viewTemplate["blocks"][i]["text"]["text"])>2900:
+            split_text=viewTemplate["blocks"][i]["text"]["text"].split("\n")
+            split_list=[]
+            for j in split_text:
+                if j:
+                    split_list.append(
+                        {
+                        "type": "section",
+                        "text": {
+                            "type": "mrkdwn",
+                            "text": j
+                        }
+                    })
+            viewTemplate["blocks"][6:] =split_list
+
 
     client.views_publish(
 
