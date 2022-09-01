@@ -182,6 +182,9 @@ viewTemplate = {
 
 @app.event("app_home_opened")
 def update_home_tab(client, event, logger):
+    if len(viewTemplate["blocks"])!=7:
+        viewTemplate["blocks"]=viewTemplate["blocks"][:7]
+    viewTemplate["blocks"][-1]["text"]["text"] = "This is Home"
     client.views_publish(
 
         user_id=event["user"],
@@ -194,23 +197,23 @@ def update_home_tab(client, event, logger):
 def approve_request(ack, body, client, say, message, event, payload):
     ack()
     query = payload['selected_option']['value']
-    viewTemplate2 = viewTemplate.copy()
+
     if len(viewTemplate["blocks"])!=7:
-        viewTemplate2["blocks"]=viewTemplate2["blocks"][:7]
+        viewTemplate["blocks"]=viewTemplate["blocks"][:7]
 
     if query == "qiita":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*QIITA*\n\n" + qiita_rss.read_rss_qiita_txt()
+        viewTemplate["blocks"][-1]["text"]["text"] = "*QIITA*\n\n" + qiita_rss.read_rss_qiita_txt()
     elif query == "zenn":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*Zenn*\n\n" + zenn_rss.read_rss_zenn()
+        viewTemplate["blocks"][-1]["text"]["text"] = "*Zenn*\n\n" + zenn_rss.read_rss_zenn()
     elif query == "googledev":
-        viewTemplate2["blocks"][-1]["text"][
+        viewTemplate["blocks"][-1]["text"][
             "text"] = "*Google Developer Blog*\n\n" + googledev_text.get_new_blog_from_google_dev()
     elif query == "publishkey":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*Publish Key*\n\n" + publishkey_rss.get_rss_publishkey(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*Publish Key*\n\n" + publishkey_rss.get_rss_publishkey(
             "https://www.publickey1.jp/atom.xml")
     elif query == "techfeed":
 
-        viewTemplate2["blocks"][6:]= [{
+        viewTemplate["blocks"][6:]= [{
             "type": "section",
             "text": {
                 "type": "mrkdwn",
@@ -243,36 +246,36 @@ def approve_request(ack, body, client, say, message, event, payload):
             }
         ]
     elif query == "gihyo":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*Gihyo*\n\n" + techblog_rss.get_rss_tech_blog(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*Gihyo*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://gihyo.jp/dev/feed/rss2")
     elif query == "aws":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*aws*\n\n" + techblog_rss.get_rss_tech_blog(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*aws*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://aws.amazon.com/jp/blogs/news/feed/")
     elif query == "mercari":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*Mercari*\n\n" + techblog_rss.get_rss_tech_blog(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*Mercari*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://engineering.mercari.com/blog/feed.xml")
     elif query == "pfn":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*Preferred Network*\n\n" + techblog_rss.get_rss_tech_blog(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*Preferred Network*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://tech.preferred.jp/ja/feed/")
     elif query == "developperio":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*DevelopperIO*\n\n" + techblog_rss.get_rss_tech_blog(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*DevelopperIO*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://dev.classmethod.jp/feed/")
     elif query == "itmedia":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*ITmedia*\n\n" + techblog_rss.get_rss_tech_blog(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*ITmedia*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://rss.itmedia.co.jp/rss/2.0/ait.xml")
     elif query == "yahoo":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*Yahoo*\n\n" + techblog_rss.get_rss_tech_blog(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*Yahoo*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://techblog.yahoo.co.jp/index.xml")
     elif query == "techblogs":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*TechBlogs*\n\n" + techblog_rss.get_rss_tech_blog(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*TechBlogs*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://yamadashy.github.io/tech-blog-rss-feed/feeds/rss.xml")[:2900]+"\n...and more"
     elif query == "infoq":
-        viewTemplate2["blocks"][-1]["text"]["text"] = "*Architecture*\n\n" + techblog_rss.get_rss_tech_blog(
+        viewTemplate["blocks"][-1]["text"]["text"] = "*Architecture*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://feed.infoq.com/")
 
     client.views_publish(
 
         user_id=body["user"]["id"],
 
-        view=viewTemplate2
+        view=viewTemplate
     )
