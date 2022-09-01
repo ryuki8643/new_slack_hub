@@ -22,7 +22,3 @@ def message_hello2(message, say):
 
 
 
-
-@app.event("app_home_opened")
-def handle_app_home_opened_events(body, logger):
-    logger.info(body)
