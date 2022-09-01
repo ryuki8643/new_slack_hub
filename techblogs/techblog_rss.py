@@ -47,6 +47,6 @@ def get_rss_tech_blog(url):
         else:
             break
     if rss_items:
-        return "\n\n".join(reversed(rss_items))
+        return re.sub(r'<.+?>','',"\n\n".join(reversed(rss_items)))
     else:
         return "Today no article"
