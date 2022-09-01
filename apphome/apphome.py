@@ -268,7 +268,7 @@ def approve_request(ack, body, client, say, message, event, payload):
             "https://techblog.yahoo.co.jp/index.xml")
     elif query == "techblogs":
         viewTemplate["blocks"][-1]["text"]["text"] = "*TechBlogs*\n\n" + techblog_rss.get_rss_tech_blog(
-            "https://yamadashy.github.io/tech-blog-rss-feed/feeds/rss.xml")+"\n...and more"
+            "https://yamadashy.github.io/tech-blog-rss-feed/feeds/rss.xml")
     elif query == "infoq":
         viewTemplate["blocks"][-1]["text"]["text"] = "*Architecture*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://feed.infoq.com/")
@@ -277,16 +277,30 @@ def approve_request(ack, body, client, say, message, event, payload):
         if len(viewTemplate["blocks"][i]["text"]["text"])>2900:
             split_text=viewTemplate["blocks"][i]["text"]["text"].split("\n")
             split_list=[]
-            for j in split_text:
-                if j:
-                    split_list.append(
-                        {
-                        "type": "section",
-                        "text": {
-                            "type": "mrkdwn",
-                            "text": j
-                        }
-                    })
+            for j in range(len(split_text)):
+                if split_text[j]:
+                    if j>0:
+                        if len(split_list[-1]["text"]["text"]+"\n"+split_text[j])<2900:
+                            split_list[-1]["text"]["text"] += "\n"+split_text[j]
+                        else:
+                            split_list.append(
+                                {
+                                    "type": "section",
+                                    "text": {
+                                        "type": "mrkdwn",
+                                        "text": split_text[j]
+                                    }
+                                })
+
+                    else:
+                        split_list.append(
+                            {
+                            "type": "section",
+                            "text": {
+                                "type": "mrkdwn",
+                                "text": split_text[j]
+                            }
+                        })
             viewTemplate["blocks"][6:] =split_list
 
 
