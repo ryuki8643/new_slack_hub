@@ -32,4 +32,5 @@ def hello():
     return "Hello World!"
 
 if __name__ == "__main__":
+    print(len(viewTemplate["blocks"]))
     flask_app.run(host="0.0.0.0", port=8000)

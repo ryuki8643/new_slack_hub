@@ -195,6 +195,9 @@ def approve_request(ack, body, client, say, message, event, payload):
     ack()
     query = payload['selected_option']['value']
     viewTemplate2 = viewTemplate.copy()
+    if len(viewTemplate["blocks"])!=7:
+        viewTemplate2["blocks"]=viewTemplate2["blocks"][:7]
+
     if query == "qiita":
         viewTemplate2["blocks"][-1]["text"]["text"] = "*QIITA*\n\n" + qiita_rss.read_rss_qiita_txt()
     elif query == "zenn":
@@ -206,7 +209,8 @@ def approve_request(ack, body, client, say, message, event, payload):
         viewTemplate2["blocks"][-1]["text"]["text"] = "*Publish Key*\n\n" + publishkey_rss.get_rss_publishkey(
             "https://www.publickey1.jp/atom.xml")
     elif query == "techfeed":
-        viewTemplate2["blocks"] += [{
+
+        viewTemplate2["blocks"][6:]= [{
             "type": "section",
             "text": {
                 "type": "mrkdwn",
