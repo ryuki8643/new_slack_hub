@@ -31,7 +31,7 @@ viewTemplate = {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "*daily_article_hub* qiita, zenn, techfeed, publishkey \n *techblog* googledev, itmedia, developperio, yahoo, gihyo, pfn, mercari, aws \n *othertechblog* techblogs, infoq"
+                "text": "*daily_article_hub* qiita, zenn, techfeed, hackernews, publishkey \n *techblog* googledev, itmedia, developperio, yahoo, gihyo, pfn, mercari, aws \n *othertechblog* techblogs, infoq"
             }
         },
         {
@@ -74,6 +74,14 @@ viewTemplate = {
                             "emoji": True
                         },
                         "value": "techfeed"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Hacker News",
+                            "emoji": True
+                        },
+                        "value": "hackernews"
                     },
                     {
                         "text": {
@@ -147,6 +155,7 @@ viewTemplate = {
                         },
                         "value": "aws"
                     },
+
                     {
                         "text": {
                             "type": "plain_text",
