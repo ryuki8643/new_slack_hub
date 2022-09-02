@@ -35,6 +35,6 @@ def get_new_blog_from_google_dev():
                     results_list.append(meta.get("content"))
             results_list.append(geturl + "\n")
     if results_list:
-        return "\n\n".join(results_list)
+        return "\n".join(results_list)
     else:
         return "Today no article"

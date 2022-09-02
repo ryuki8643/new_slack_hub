@@ -40,7 +40,7 @@ def get_rss_publishkey(url):
         else:
             break
     if rss_items:
-        return "\n\n".join(reversed(rss_items))
+        return "\n".join(reversed(rss_items))
     else:
         return "Today no article"
 

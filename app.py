@@ -13,6 +13,7 @@ from techfeed.throw_techfeed_to_slack import *
 from publishkey.throw_publishkey import *
 from apphome.apphome import *
 from googledev.throw_googledev_toslack import *
+from Hacker_news.throw_hacker_news_toslack import *
 
 
 logging.basicConfig(level=logging.INFO)

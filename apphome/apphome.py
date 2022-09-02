@@ -1,5 +1,6 @@
 import os
 
+from Hacker_news.hacker_news_rss import get_rss_hacker_news
 from googledev import googledev_text
 from publishkey import publishkey_rss
 from qiita import qiita_rss
@@ -182,8 +183,8 @@ viewTemplate = {
 
 @app.event("app_home_opened")
 def update_home_tab(client, event, logger):
-    if len(viewTemplate["blocks"])!=7:
-        viewTemplate["blocks"]=viewTemplate["blocks"][:7]
+    if len(viewTemplate["blocks"]) != 7:
+        viewTemplate["blocks"] = viewTemplate["blocks"][:7]
     viewTemplate["blocks"][-1]["text"]["text"] = "This is Home"
     client.views_publish(
 
@@ -198,8 +199,8 @@ def approve_request(ack, body, client, say, message, event, payload):
     ack()
     query = payload['selected_option']['value']
 
-    if len(viewTemplate["blocks"])!=7:
-        viewTemplate["blocks"]=viewTemplate["blocks"][:7]
+    if len(viewTemplate["blocks"]) != 7:
+        viewTemplate["blocks"] = viewTemplate["blocks"][:7]
 
     if query == "qiita":
         viewTemplate["blocks"][-1]["text"]["text"] = "*QIITA*\n\n" + qiita_rss.read_rss_qiita_txt()
@@ -213,37 +214,37 @@ def approve_request(ack, body, client, say, message, event, payload):
             "https://www.publickey1.jp/atom.xml")
     elif query == "techfeed":
 
-        viewTemplate["blocks"][6:]= [{
+        viewTemplate["blocks"][6:] = [{
             "type": "section",
             "text": {
                 "type": "mrkdwn",
                 "text": "*Techfeed All*\n\n" + techfeed_rss.get_rss_tech_feed(
-            "https://techfeed.io/feeds/categories/all?userId=" + os.environ["TECHFEED_USER_ID"])
+                    "https://techfeed.io/feeds/categories/all?userId=" + os.environ["TECHFEED_USER_ID"])
             }
         }, {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
                 "text": "*Techfeed Web FrontEnd*\n\n" + techfeed_rss.get_rss_tech_feed(
-            "https://techfeed.io/feeds/categories/Web%20%2F%20Frontend?userId=" + os.environ[
-                "TECHFEED_USER_ID"])
+                    "https://techfeed.io/feeds/categories/Web%20%2F%20Frontend?userId=" + os.environ[
+                        "TECHFEED_USER_ID"])
             }
         }, {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
                 "text": "*Techfeed Cloud Backend*\n\n" + techfeed_rss.get_rss_tech_feed(
-            "https://techfeed.io/feeds/categories/Cloud%20%2F%20Backend?userId=" + os.environ[
-                "TECHFEED_USER_ID"])
+                    "https://techfeed.io/feeds/categories/Cloud%20%2F%20Backend?userId=" + os.environ[
+                        "TECHFEED_USER_ID"])
             }
-        } , {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": "*Techfeed Programming*\n\n" + techfeed_rss.get_rss_tech_feed(
-            "https://techfeed.io/feeds/categories/Programming?userId=" + os.environ["TECHFEED_USER_ID"])
-                }
+        }, {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*Techfeed Programming*\n\n" + techfeed_rss.get_rss_tech_feed(
+                    "https://techfeed.io/feeds/categories/Programming?userId=" + os.environ["TECHFEED_USER_ID"])
             }
+        }
         ]
     elif query == "gihyo":
         viewTemplate["blocks"][-1]["text"]["text"] = "*Gihyo*\n\n" + techblog_rss.get_rss_tech_blog(
@@ -272,16 +273,18 @@ def approve_request(ack, body, client, say, message, event, payload):
     elif query == "infoq":
         viewTemplate["blocks"][-1]["text"]["text"] = "*Architecture*\n\n" + techblog_rss.get_rss_tech_blog(
             "https://feed.infoq.com/")
+    elif query == "hackernews":
+        viewTemplate["blocks"][-1]["text"]["text"] = get_rss_hacker_news("https://news.ycombinator.com/front")
 
-    for i in range(6,len(viewTemplate["blocks"])):
-        if len(viewTemplate["blocks"][i]["text"]["text"])>2900:
-            split_text=viewTemplate["blocks"][i]["text"]["text"].split("\n")
-            split_list=[]
+    for i in range(6, len(viewTemplate["blocks"])):
+        if len(viewTemplate["blocks"][i]["text"]["text"]) > 2900:
+            split_text = viewTemplate["blocks"][i]["text"]["text"].split("\n")
+            split_list = []
             for j in range(len(split_text)):
                 if split_text[j]:
-                    if j>0:
-                        if len(split_list[-1]["text"]["text"]+"\n"+split_text[j])<2900:
-                            split_list[-1]["text"]["text"] += "\n"+split_text[j]
+                    if j > 0:
+                        if len(split_list[-1]["text"]["text"] + "\n" + split_text[j]) < 2900:
+                            split_list[-1]["text"]["text"] += "\n" + split_text[j]
                         else:
                             split_list.append(
                                 {
@@ -295,14 +298,13 @@ def approve_request(ack, body, client, say, message, event, payload):
                     else:
                         split_list.append(
                             {
-                            "type": "section",
-                            "text": {
-                                "type": "mrkdwn",
-                                "text": split_text[j]
-                            }
-                        })
-            viewTemplate["blocks"][6:] =split_list
-
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": split_text[j]
+                                }
+                            })
+            viewTemplate["blocks"][6:] = split_list
 
     client.views_publish(
 
