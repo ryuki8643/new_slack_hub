@@ -3,7 +3,7 @@ import os
 from Hacker_news.hacker_news_rss import get_rss_hacker_news
 from googledev import googledev_text
 from publishkey import publishkey_rss
-from qiita import qiita_rss
+from qiita import qiita_rss, qiita_API
 from slackbot_init._init_ import app
 from techblogs import techblog_rss
 from techfeed import techfeed_rss
@@ -171,6 +171,15 @@ viewTemplate = {
                             "emoji": True
                         },
                         "value": "infoq"
+
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Qiita Summary",
+                            "emoji": True
+                        },
+                        "value": "qiisum"
                     }
                 ],
                 "action_id": "static_select-action"
@@ -284,6 +293,8 @@ def approve_request(ack, body, client, say, message, event, payload):
             "https://feed.infoq.com/")
     elif query == "hackernews":
         viewTemplate["blocks"][-1]["text"]["text"] = get_rss_hacker_news("https://news.ycombinator.com/front")
+    elif query == "qiisum":
+        viewTemplate["blocks"][-1]["text"]["text"] = "\n"+qiita_API.summaries_of_qiita_pop()
 
     for i in range(6, len(viewTemplate["blocks"])):
         if len(viewTemplate["blocks"][i]["text"]["text"]) > 2900:
