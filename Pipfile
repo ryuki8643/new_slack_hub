@@ -15,6 +15,7 @@ pysummarization = "*"
 unidic-lite = "*"
 lxml = "*"
 flask = "*"
+"discord.py" = "*"
 
 [dev-packages]
 
