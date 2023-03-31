@@ -17,7 +17,7 @@ from Hacker_news.throw_hacker_news_toslack import *
 from slackbot_init._init_ import discord_client
 from send_text.send_text import send_discord_and_slack
 from dotenv import load_dotenv
-
+from concurrent.futures import ProcessPoolExecutor
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -44,9 +44,16 @@ async def on_message(message):
 @flask_app.route("/discord")
 def dis():
     send_discord_and_slack("test")
-    return "test"
+    return "discord"
 
+def flask_run():
+    flask_app.run(host="0.0.0.0", port=8000)
+def discord_run():
+    discord_client.run(os.environ.get("DISCORD_ACCESS_TOKEN"))
 if __name__ == "__main__":
     print(len(viewTemplate["blocks"]))
-    flask_app.run(host="0.0.0.0", port=8000)
-    discord_client.run(os.environ.get("DISCORD_ACCESS_TOKEN"))
+    with ProcessPoolExecutor(max_workers=2) as executor:
+        executor.submit(flask_run)
+        executor.submit(discord_run)
+    
+    
