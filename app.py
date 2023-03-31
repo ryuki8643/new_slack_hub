@@ -35,11 +35,13 @@ def slack_events():
 @flask_app.route("/")
 def hello():
     return "Hello World!"
+
 @discord_client.event
 async def on_message(message):
     if message.author.bot:
         return
     await message.channel.send('penguin')
+
 @flask_app.route("/discord")
 def dis():
     send_discord_and_slack("test")
@@ -47,12 +49,14 @@ def dis():
 
 def flask_run():
     flask_app.run(host="0.0.0.0", port=8000)
+
 def discord_run():
     discord_client.run(os.environ.get("DISCORD_ACCESS_TOKEN"))
+
 if __name__ == "__main__":
     print(len(viewTemplate["blocks"]))
     with ProcessPoolExecutor(max_workers=2) as executor:
-        executor.submit(flask_run)
         executor.submit(discord_run)
+        executor.submit(flask_run)
     
     
