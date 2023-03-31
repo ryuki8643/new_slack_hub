@@ -45,10 +45,10 @@ async def on_message(message):
 @flask_app.route("/discord")
 def dis():
     send_discord_and_slack("test")
-    return "discord"
+    return "discords"
 
 def flask_run():
-    flask_app.run(host="0.0.0.0", port=8000)
+    flask_app.run(host="0.0.0.0", port=8000,threaded=True)
 
 def discord_run():
     discord_client.run(os.environ.get("DISCORD_ACCESS_TOKEN"))
@@ -56,5 +56,6 @@ def discord_run():
 if __name__ == "__main__":
     print(len(viewTemplate["blocks"]))
     discord_run()
+    flask_run()
     
     
