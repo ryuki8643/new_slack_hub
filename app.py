@@ -35,7 +35,12 @@ def slack_events():
 @flask_app.route("/")
 def hello():
     return "Hello World!"
-
+@discord_client.event
+async def on_message(message):
+    if message.author.bot:
+        return
+    if message.content == '/test':
+        await message.channel.send('penguin')
 @flask_app.route("/discord")
 def dis():
     send_discord_and_slack("test")
