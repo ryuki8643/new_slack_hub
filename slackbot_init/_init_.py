@@ -1,11 +1,14 @@
 import os
 from slack_bolt import App
-
+import discord
 
 from dotenv import load_dotenv
 
 # .envファイルの内容を読み込みます
 load_dotenv()
+
+
+discord_client = discord.Client()
 
 # ボットトークンとソケットモードハンドラーを使ってアプリを初期化します
 app = App(
