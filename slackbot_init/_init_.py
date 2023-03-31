@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-discord_client = discord.Client()
+discord_client = discord.Client(intents=discord.Intents.all())
 
 # ボットトークンとソケットモードハンドラーを使ってアプリを初期化します
 app = App(
