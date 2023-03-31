@@ -55,8 +55,6 @@ def discord_run():
 
 if __name__ == "__main__":
     print(len(viewTemplate["blocks"]))
-    with ProcessPoolExecutor(max_workers=2) as executor:
-        executor.submit(discord_run)
-        executor.submit(flask_run)
+    discord_run()
     
     
