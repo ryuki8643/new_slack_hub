@@ -8,6 +8,8 @@ main関数に処理の関数をimportすれば動くので、zenn,qiitaなどご
 pipenv にライブラリを追加したら
 pipenv update
 pipenv lock -r > requirements.txt
+or
+pip3 freeze > requirements.txt
 を実行すること
 
 デプロイ先はAzure App Serviceで
