@@ -36,8 +36,8 @@ def hello():
 
 @flask_app.route("/test")
 def test():
-    send_discord_and_slack("a",print,Channels.DAYLY)
-    return "test"
+    # send_discord_and_slack("a",print,Channels.DAYLY)
+    return "tests"
 
 def flask_run():
     flask_app.run(host="0.0.0.0", port=8000,threaded=True)
