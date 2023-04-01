@@ -20,12 +20,16 @@ def send_discord_and_slack(text,say,channel):
     say(text)
     webhook_url  = discord_channels[channel]
     split_text = text.split("\n")
+    skip=False
     for i in range(len(split_text)):
+        if skip:
+            skip=False
+            continue
         send_text=split_text[i]
         if i+1<len(split_text):
             if split_text[i+1][:4]=="http":
                 send_text+=split_text[i+1]
-                i+=1
+                skip=True
 
                 
         main_content = {
