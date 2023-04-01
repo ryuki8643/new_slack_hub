@@ -14,12 +14,10 @@ from publishkey.throw_publishkey import *
 from apphome.apphome import *
 from googledev.throw_googledev_toslack import *
 from Hacker_news.throw_hacker_news_toslack import *
-from slackbot_init._init_ import discord_client
 from send_text.send_text import send_discord_and_slack
-from dotenv import load_dotenv
 from concurrent.futures import ProcessPoolExecutor
 
-load_dotenv()
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -42,20 +40,12 @@ async def on_message(message):
         return
     await message.channel.send('penguin')
 
-@flask_app.route("/discord")
-def dis():
-    send_discord_and_slack("test")
-    return "discords"
-
 def flask_run():
     flask_app.run(host="0.0.0.0", port=8000,threaded=True)
 
-def discord_run():
-    discord_client.run(os.environ.get("DISCORD_ACCESS_TOKEN"))
 
 if __name__ == "__main__":
     print(len(viewTemplate["blocks"]))
-    discord_run()
     flask_run()
     
     
