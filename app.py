@@ -34,12 +34,6 @@ def slack_events():
 def hello():
     return "Hello World!"
 
-@discord_client.event
-async def on_message(message):
-    if message.author.bot:
-        return
-    await message.channel.send('penguin')
-
 def flask_run():
     flask_app.run(host="0.0.0.0", port=8000,threaded=True)
 

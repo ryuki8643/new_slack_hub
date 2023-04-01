@@ -1,5 +1,12 @@
 import requests, json
 
+from enum import Enum
+
+# 列挙型の定義
+class Channels(Enum):
+    DAYLY = "daily"
+    TECHBLOGS = "techblogs"
+    OTHERTECHBLOGS = "othertechblogs"
 
 discord_channels={"daily":"https://discordapp.com/api/webhooks/1091710346466709684/R8SMkKPmuRx9PqwGOPqSdKCJkiA7T5zZ-0Pl96QT-b-8dSZDVQTYtVzjyP_u7J9h36Ev",
                   "techblogs":"https://discordapp.com/api/webhooks/1091710531678781450/qr8_7aQ_s6k9rlclsIqGplcsXYCq0FjixnFlT4OgVDA_aqwO0-05WWIQlKOYdWFWu0Fz",
