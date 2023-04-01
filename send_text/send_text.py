@@ -39,5 +39,5 @@ def send_discord_and_slack(text,say,channel):
                     }
         headers      = {'Content-Type': 'application/json'}
 
-        requests.post(webhook_url, json.dumps(main_content), headers=headers)
+        # requests.post(webhook_url, json.dumps(main_content), headers=headers)
         sleep(1)
