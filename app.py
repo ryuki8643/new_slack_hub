@@ -16,7 +16,7 @@ from googledev.throw_googledev_toslack import *
 from Hacker_news.throw_hacker_news_toslack import *
 from send_text.send_text import send_discord_and_slack
 from concurrent.futures import ProcessPoolExecutor
-
+from send_text.send_text import send_discord_and_slack,Channels
 
 logging.basicConfig(level=logging.INFO)
 
@@ -33,6 +33,11 @@ def slack_events():
 @flask_app.route("/")
 def hello():
     return "Hello World!"
+
+@flask_app.route("/test")
+def test():
+    send_discord_and_slack("a",print,Channels.DAYLY)
+    return "test"
 
 def flask_run():
     flask_app.run(host="0.0.0.0", port=8000,threaded=True)
