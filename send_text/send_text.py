@@ -28,7 +28,7 @@ def send_discord_and_slack(text,say,channel):
         send_text=split_text[i]
         if i+1<len(split_text):
             if split_text[i+1][:4]=="http":
-                send_text+=split_text[i+1]
+                send_text+="\n"+split_text[i+1]
                 skip=True
 
                 
