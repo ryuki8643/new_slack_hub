@@ -1,7 +1,7 @@
 import requests, json
 
 from enum import Enum
-
+from time import sleep
 # 列挙型の定義
 class Channels(Enum):
     DAYLY = "daily"
@@ -14,11 +14,14 @@ discord_channels={Channels.DAYLY:"https://discordapp.com/api/webhooks/1091710346
 def send_discord_and_slack(text,say,channel):
     say(text)
     webhook_url  = discord_channels[channel]
-    main_content = {
-                    'username': 'tech_news_bot',
-                    'avatar_url': 'https://drive.google.com/file/d/1tdtv3bGehSVaf7ER0_SJqeIudeDbEwNY/view?usp=share_link',
-                    'content': text
-                }
-    headers      = {'Content-Type': 'application/json'}
+    split_text = text.split("\n")
+    for i in split_text:
+        main_content = {
+                        'username': 'tech_news_bot',
+                        'avatar_url': 'https://drive.google.com/file/d/1tdtv3bGehSVaf7ER0_SJqeIudeDbEwNY/view?usp=share_link',
+                        'content': i
+                    }
+        headers      = {'Content-Type': 'application/json'}
 
-    requests.post(webhook_url, json.dumps(main_content), headers=headers)
+        requests.post(webhook_url, json.dumps(main_content), headers=headers)
+        sleep(1)
