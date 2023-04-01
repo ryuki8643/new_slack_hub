@@ -8,9 +8,9 @@ class Channels(Enum):
     TECHBLOGS = "techblogs"
     OTHERTECHBLOGS = "othertechblogs"
 
-discord_channels={"daily":"https://discordapp.com/api/webhooks/1091710346466709684/R8SMkKPmuRx9PqwGOPqSdKCJkiA7T5zZ-0Pl96QT-b-8dSZDVQTYtVzjyP_u7J9h36Ev",
-                  "techblogs":"https://discordapp.com/api/webhooks/1091710531678781450/qr8_7aQ_s6k9rlclsIqGplcsXYCq0FjixnFlT4OgVDA_aqwO0-05WWIQlKOYdWFWu0Fz",
-                  "othertechblogs":"https://discordapp.com/api/webhooks/1091710702399533076/ZtgNz-KGF8vhicwvRLbBYnzOwbc1EYfZnDO7DeuiDQAJ9XuSN_fsV7bJA_9_BnBoBDLZ"}
+discord_channels={Channels.DAYLY:"https://discordapp.com/api/webhooks/1091710346466709684/R8SMkKPmuRx9PqwGOPqSdKCJkiA7T5zZ-0Pl96QT-b-8dSZDVQTYtVzjyP_u7J9h36Ev",
+                  Channels.TECHBLOGS:"https://discordapp.com/api/webhooks/1091710531678781450/qr8_7aQ_s6k9rlclsIqGplcsXYCq0FjixnFlT4OgVDA_aqwO0-05WWIQlKOYdWFWu0Fz",
+                  Channels.OTHERTECHBLOGS:"https://discordapp.com/api/webhooks/1091710702399533076/ZtgNz-KGF8vhicwvRLbBYnzOwbc1EYfZnDO7DeuiDQAJ9XuSN_fsV7bJA_9_BnBoBDLZ"}
 async def send_discord_and_slack(text,say,channel):
     say(text)
     webhook_url  = discord_channels[channel]
