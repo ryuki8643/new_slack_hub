@@ -8,5 +8,5 @@ def message_hello1(message, say):
     send_discord_and_slack(
         get_rss_hacker_news("https://news.ycombinator.com/front"),
         say,
-        Channels.TECHBLOGS,
+        Channels.DAYLY,
     )

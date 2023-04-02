@@ -15,26 +15,34 @@ def message_hello1(message, say):
         + techfeed_rss.get_rss_tech_feed(
             "https://techfeed.io/feeds/categories/all?userId="
             + os.environ["TECHFEED_USER_ID"]
-        )
+        ),
+        say,
+        Channels.DAYLY,
     )
     send_discord_and_slack(
         "*Techfeed Web FrontEnd*\n\n"
         + techfeed_rss.get_rss_tech_feed(
             "https://techfeed.io/feeds/categories/Web%20%2F%20Frontend?userId="
             + os.environ["TECHFEED_USER_ID"]
-        )
+        ),
+        say,
+        Channels.DAYLY,
     )
     send_discord_and_slack(
         "*Techfeed Cloud Backend*\n\n"
         + techfeed_rss.get_rss_tech_feed(
             "https://techfeed.io/feeds/categories/Cloud%20%2F%20Backend?userId="
             + os.environ["TECHFEED_USER_ID"]
-        )
+        ),
+        say,
+        Channels.DAYLY,
     )
     send_discord_and_slack(
         "*Techfeed Programming*\n\n"
         + techfeed_rss.get_rss_tech_feed(
             "https://techfeed.io/feeds/categories/Programming?userId="
             + os.environ["TECHFEED_USER_ID"]
-        )
+        ),
+        say,
+        Channels.DAYLY,
     )
