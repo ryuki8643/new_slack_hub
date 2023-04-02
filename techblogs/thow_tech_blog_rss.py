@@ -45,7 +45,7 @@ def message_hello1(message, say):
     )
 
 
-@app.message("developperio")
+@app.message("developersio")
 def message_hello1(message, say):
     send_discord_and_slack(
         "*DevelopperIO*\n\n"
