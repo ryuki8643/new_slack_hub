@@ -44,5 +44,14 @@ def send_discord_and_slack(text, say, channel):
         }
         headers = {"Content-Type": "application/json"}
 
-        # requests.post(webhook_url, json.dumps(main_content), headers=headers)
+        response = int(requests.post(webhook_url, json.dumps(main_content), headers=headers).status_code)
+        while response >= 400:
+            print(response)
+            print(split_text[i], main_content["content"])
+            response = int(
+                requests.post(
+                    webhook_url, json.dumps(main_content), headers=headers
+                ).status_code
+            )
+            sleep(1)
         sleep(1)
