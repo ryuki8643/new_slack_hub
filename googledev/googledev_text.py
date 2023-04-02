@@ -5,21 +5,26 @@ import datetime
 
 def read_article(url):
     req = requests.get(url)
-    txt = BeautifulSoup(req.text, 'html.parser')
+    txt = BeautifulSoup(req.text, "html.parser")
     return txt
 
 
 def judge_date(date_text):
     # str = 'August 08, 2022'
-    valid_dates = set([datetime.datetime.now().date(), (datetime.datetime.now() - datetime.timedelta(days=1)).date()])
-    now_day = datetime.datetime.strptime(date_text, '%B %d, %Y').date()
+    valid_dates = set(
+        [
+            datetime.datetime.now().date(),
+            (datetime.datetime.now() - datetime.timedelta(days=1)).date(),
+        ]
+    )
+    now_day = datetime.datetime.strptime(date_text, "%B %d, %Y").date()
     return now_day in valid_dates
 
 
 def get_new_blog_from_google_dev():
-    top_page = read_article('https://developers.googleblog.com/')
-    cards_link_list = top_page.findAll('a', class_='dgc-card__href')
-    dates_list = top_page.findAll('div', class_='dgc-card__info')
+    top_page = read_article("https://developers.googleblog.com/")
+    cards_link_list = top_page.findAll("a", class_="dgc-card__href")
+    dates_list = top_page.findAll("div", class_="dgc-card__info")
     results_list = []
     for article_num in range(len(dates_list)):
         query = dates_list[article_num].p.text

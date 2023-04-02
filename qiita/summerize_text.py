@@ -19,4 +19,3 @@ def summarize_text(document):
     for sentence in result_dict["summarize_result"]:
         result_text += sentence
     return result_text
-

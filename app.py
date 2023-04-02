@@ -14,12 +14,10 @@ from publishkey.throw_publishkey import *
 from apphome.apphome import *
 from googledev.throw_googledev_toslack import *
 from Hacker_news.throw_hacker_news_toslack import *
-from slackbot_init._init_ import discord_client
 from send_text.send_text import send_discord_and_slack
-from dotenv import load_dotenv
 from concurrent.futures import ProcessPoolExecutor
+from send_text.send_text import send_discord_and_slack, Channels
 
-load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
 
@@ -28,34 +26,27 @@ from flask import Flask, request
 flask_app = Flask(__name__)
 handler = SlackRequestHandler(app)
 
+
 @flask_app.route("/slack/events", methods=["POST"])
 def slack_events():
     return handler.handle(request)
+
 
 @flask_app.route("/")
 def hello():
     return "Hello World!"
 
-@discord_client.event
-async def on_message(message):
-    if message.author.bot:
-        return
-    await message.channel.send('penguin')
 
-@flask_app.route("/discord")
-def dis():
-    send_discord_and_slack("test")
-    return "discords"
+@flask_app.route("/test")
+def test():
+    # send_discord_and_slack("a",print,Channels.DAYLY)
+    return "penguins"
+
 
 def flask_run():
-    flask_app.run(host="0.0.0.0", port=8000,threaded=True)
+    flask_app.run(host="0.0.0.0", port=8000)
 
-def discord_run():
-    discord_client.run(os.environ.get("DISCORD_ACCESS_TOKEN"))
 
 if __name__ == "__main__":
     print(len(viewTemplate["blocks"]))
-    discord_run()
     flask_run()
-    
-    
