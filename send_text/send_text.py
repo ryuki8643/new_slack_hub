@@ -28,6 +28,8 @@ def send_discord_and_slack(text, say, channel):
     split_text = text.split("\n")
     skip = False
     for i in range(len(split_text)):
+        if split_text[i] == "":
+            continue
         if skip:
             skip = False
             continue

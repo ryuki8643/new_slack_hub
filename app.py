@@ -39,6 +39,7 @@ def hello():
 
 @flask_app.route("/test")
 def test():
+    send_discord_and_slack("a",print,Channels.DAYLY)
     return "penguins"
 
 
