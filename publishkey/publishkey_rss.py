@@ -6,7 +6,6 @@ import datetime
 
 
 def read_rss_publishkey(url):
-    #    url = 'https://rss.itmedia.co.jp/rss/2.0/ait.xml'
     req = requests.get(url)
     txt = BeautifulSoup(req.text, "html.parser")
     return txt
