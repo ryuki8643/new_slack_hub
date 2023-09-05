@@ -16,4 +16,6 @@ pip3 freeze > requirements.txt
 start up scriptとして以下のコードを実行している。
 gunicorn --bind=0.0.0.0 --timeout 600 app:flask_app
 
+Azureの期限が切れたのでrenderに移動
+
 https://devcenter.heroku.com/ja/articles/python-gunicorn
