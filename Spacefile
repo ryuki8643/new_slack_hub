@@ -1,0 +1,22 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: new-slack-hub
+    src: ./
+    engine: python3.9
+    primary: true
+    presets:
+      env:
+        - name: SLACK_BOT_TOKEN
+        - name: SLACK_SIGNING_SECRET
+        - name: SLACK_APP_TOKEN
+        - name: QIITA_ACCESS_TOKEN
+        - name: SCM_DO_BUILD_DURING_DEPLOYMENT
+        - name: TECHFEED_USER_ID
+        - name: DISCORD_ACCESS_TOKEN
+        - name: DISCORD_WEBHOOK_DAILY
+        - name: DISCORD_WEBHOOK_TECHBLOG
+        - name: DISCORD_WEBHOOK_OTHERTECHBLOG
+    run: gunicorn app:flask_app
+    dev: gunicorn app:flask_app --reload
+    public: true

@@ -8,13 +8,11 @@ requests = "*"
 bs4 = "*"
 python-dotenv = "*"
 slack-bolt = "*"
-mecab-python3 = "*"
-numpy = "*"
-nltk = "*"
-pysummarization = "*"
-unidic-lite = "*"
 lxml = "*"
 flask = "*"
+pipenv = "*"
+gunicorn = "*"
+lock = "*"
 
 [dev-packages]
 

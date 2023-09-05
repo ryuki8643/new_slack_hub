@@ -1,4 +1,4 @@
-from qiita import qiita_rss, qiita_API
+from qiita import qiita_rss
 from slackbot_init._init_ import app
 from send_text.send_text import send_discord_and_slack, Channels
 
@@ -15,7 +15,7 @@ def message_hello1(message, say):
     )
 
 
-@app.message("qiisum")
-def message_hello2(message, say):
-    for texts in qiita_API.summaries_of_qiita_pop():
-        say(texts)
+# @app.message("qiisum")
+# def message_hello2(message, say):
+#     for texts in qiita_API.summaries_of_qiita_pop():
+#         say(texts)
